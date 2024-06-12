@@ -20,7 +20,3 @@ export function moveDoodler(e:KeyboardEvent) {
     }
   }
   
-  export function initializeControls() {
-    document.addEventListener("keydown", moveDoodler);
-    document.addEventListener("keyup", stopDoodler);
-  }

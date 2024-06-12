@@ -8,8 +8,8 @@ import { detectCollision } from './utils/collision';
 import platformImg from './assets/platform.png'
 import { generatePlatform,newPlatform, drawPlatform } from './elements/platform';
 import { gameOverScreen } from './elements/gameover';
-import { initializeControls } from './elements/events';
 import { drawScore } from './elements/score';
+import { moveDoodler, stopDoodler } from './elements/events';
 
 export let score = 0;
 export let gameOver = false;
@@ -76,7 +76,6 @@ function updatePlayer(){
   //  lose condition
   if(player.center.y > canvas.height) {
     gameOver = true;
-    console.log(initializeControls);
   };
   ctx.drawImage(player.image,player.center.x ,player.center.y,player.width,player.height)
 }
@@ -92,3 +91,6 @@ function updatePlatform(platform:Rectangle){
     newPlatform();
   }
 }
+
+document.addEventListener("keydown", moveDoodler);
+document.addEventListener("keyup", stopDoodler);
