@@ -1,0 +1,8 @@
+body{
+  display: flex;
+  justify-content: center;
+}
+
+#canvas{
+  background-image: url(assets/doodlejumpbg.png);
+}
