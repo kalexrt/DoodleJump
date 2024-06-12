@@ -6,11 +6,11 @@ import { getRandomInt } from "../utils/common"
 
 
 export function generatePlatform(){
-    for(let i =0; i< 7; i++){
+    for(let i =0; i< 6; i++){
     let platform = new Rectangle(
       platformWidth,
       platformHeight, 
-      new Point(getRandomInt(0,canvas.width * 4/5), canvas.height - 120*i - 100))
+      new Point(getRandomInt(0,canvas.width * 4/5), canvas.height - 123*i))
     platformArray.push(platform)
   }}
   
