@@ -16,7 +16,7 @@ export class Doodler extends Rectangle {
 
     constructor(width: number, height: number, center: Point) {
         super(width, height, center);
-        this.dx = 4;
+        this.dx = 0;
         this.dy = 0;
         this.image = rightImage;
     }
