@@ -7,3 +7,5 @@ export const ctx = canvas.getContext('2d')!;
 export const platformWidth = 60;
 export const platformHeight = 18;
 export const platformImage = new Image();
+export const enemyHeight = 60;
+export const enemyWidth = 100;

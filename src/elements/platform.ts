@@ -13,7 +13,9 @@ export function generatePlatform(){
       new Point(getRandomInt(0,canvas.width * 4/5), canvas.height - 123*i))
     platformArray.push(platform)
   }}
-  
+
+  //0,35 120,31 60,18
+
 export function newPlatform(){
     let platform = new Rectangle(
       platformWidth,

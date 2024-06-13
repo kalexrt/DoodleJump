@@ -1,5 +1,5 @@
 import './style.css'
-import { CANVAS_HEIGHT, CANVAS_WIDTH, ctx, canvas, jumpvelocity, gravity, platformImage } from './constants';
+import { CANVAS_HEIGHT, CANVAS_WIDTH, ctx, canvas, jumpvelocity, gravity, platformImage, enemyHeight, enemyWidth } from './constants';
 import { Doodler } from './elements/Doodler';
 import Point from './shape/Point';
 import Rectangle from './shape/Rectangle';
@@ -11,13 +11,15 @@ import { gameOverScreen } from './elements/gameover';
 import { drawScore } from './elements/score';
 import { moveDoodler, stopDoodler } from './elements/events';
 import { clickPLay, hoverPlay, mainMenu } from './elements/mainmenu';
+import { generateEnemy, drawEnemy, tryGenerateEnemy } from './elements/enemy';
 
-
+export let platformArray:Rectangle[] = [];
+export const enemyArray:Rectangle[]=[];
 export let menu = true;
 export let score = 0;
 export let gameOver = true;
-export let platformArray:Rectangle[] = [];
 export const player = new Doodler(50,50,new Point(canvas.width/2 - 25, canvas.height*3/4 - 25))
+
 const collisionSound = document.getElementById('collisionSound') as HTMLAudioElement;
 const loseSound = document.getElementById('loseSound') as HTMLAudioElement;
 
@@ -32,7 +34,6 @@ platformImage.src = platformImg;
 window.onload = function() {
   mainMenu();
 };
-
 
 function draw() {
   if (gameOver) return gameOverScreen();
@@ -53,8 +54,19 @@ function draw() {
     }; 
     drawPlatform(platform);
   });
+  
+  enemyArray.forEach(enemy =>{
+    updateEnemy(enemy);
+    if (detectCollision(player,enemy)){
+      gameOver = true;
+      loseSound.currentTime = 0; 
+      loseSound.play();
+    }
+    drawEnemy(enemy);
+  })
+
+  tryGenerateEnemy(score);
   drawScore();
-  //next frame
   requestAnimationFrame(draw);
 }
 
@@ -96,13 +108,22 @@ function updatePlayer(){
 
 function updatePlatform(platform:Rectangle){
   if(player.dy < 0 && player.center.y < canvas.height * 3/5){
-  platform.center.y -= jumpvelocity
-  score += Math.abs(jumpvelocity)/100;
+    platform.center.y -= jumpvelocity;
+    score += Math.abs(jumpvelocity)/100;
   }
   //platform goes out of screen
   if(platform.center.y >= canvas.height){
     platformArray.shift();
     newPlatform();
+  }
+}
+
+function updateEnemy(enemy:Rectangle){
+  if(player.dy < 0 && player.center.y < canvas.height * 3/5){
+    enemy.center.y -= jumpvelocity;
+  }
+  if(enemy.center.y >= canvas.height){
+    enemyArray.shift();
   }
 }
 
