@@ -14,7 +14,7 @@ import { clickPLay, hoverPlay, mainMenu } from './elements/mainmenu';
 import { drawEnemy, tryGenerateEnemy } from './elements/enemy';
 
 export let platformArray:Rectangle[] = [];
-export const enemyArray:Rectangle[]=[];
+export let enemyArray:Rectangle[]=[];
 export let menu = true;
 export let score = 0;
 export let gameOver = true;
@@ -75,6 +75,7 @@ export function startGame(){
   gameOver = false;
   menu = false;
   score = 0;
+  enemyArray = [];
   platformArray = [];
   player.dy = jumpvelocity;
   player.center.x = canvas.width/2 - 25;
