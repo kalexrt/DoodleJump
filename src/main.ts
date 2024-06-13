@@ -1,5 +1,5 @@
 import './style.css'
-import { CANVAS_HEIGHT, CANVAS_WIDTH, ctx, canvas, jumpvelocity, gravity, platformImage, enemyHeight, enemyWidth } from './constants';
+import { CANVAS_HEIGHT, CANVAS_WIDTH, ctx, canvas, jumpvelocity, gravity, platformImage } from './constants';
 import { Doodler } from './elements/Doodler';
 import Point from './shape/Point';
 import Rectangle from './shape/Rectangle';
@@ -11,7 +11,7 @@ import { gameOverScreen } from './elements/gameover';
 import { drawScore } from './elements/score';
 import { moveDoodler, stopDoodler } from './elements/events';
 import { clickPLay, hoverPlay, mainMenu } from './elements/mainmenu';
-import { generateEnemy, drawEnemy, tryGenerateEnemy } from './elements/enemy';
+import { drawEnemy, tryGenerateEnemy } from './elements/enemy';
 
 export let platformArray:Rectangle[] = [];
 export const enemyArray:Rectangle[]=[];
