@@ -38,8 +38,8 @@ function isCollidingWithAnyPlatform(rect:Rectangle) {
 }
 
 export function tryGenerateEnemy(score: number): void {
-    const initialProbability = 0.00001; // Initial probability is 0.5%
-    const incrementRate = 0.00001; // Adjust this value to control how fast the probability increases
+    const initialProbability = 0.00001; 
+    const incrementRate = 0.00001; 
 
     // Calculate the current probability based on the score
     let currentProbability = initialProbability + (incrementRate * score);

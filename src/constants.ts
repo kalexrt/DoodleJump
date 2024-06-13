@@ -1,6 +1,6 @@
 export const CANVAS_WIDTH = 475;
 export const CANVAS_HEIGHT = 720;
-export const jumpvelocity = -12; 
+export const jumpvelocity = -10; 
 export const gravity = 0.4
 export const canvas = document.querySelector('#canvas') as HTMLCanvasElement;
 export const ctx = canvas.getContext('2d')!;

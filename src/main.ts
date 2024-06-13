@@ -31,6 +31,7 @@ canvas.height = CANVAS_HEIGHT;
 
 platformImage.src = platformImg;
 
+//load images before calling main menu
 window.onload = function() {
   mainMenu();
 };
@@ -55,17 +56,21 @@ function draw() {
     drawPlatform(platform);
   });
   
+  //iterate thorugh each enemy
   enemyArray.forEach(enemy =>{
     updateEnemy(enemy);
+
     if (detectCollision(player,enemy)){
       gameOver = true;
       loseSound.currentTime = 0; 
       loseSound.play();
     }
+
     drawEnemy(enemy);
   })
 
-  tryGenerateEnemy(score);
+  tryGenerateEnemy(score); //enemy generation chance increases with score
+
   drawScore();
   requestAnimationFrame(draw);
 }
@@ -90,7 +95,6 @@ function updatePlayer(){
   player.center.x += player.dx;
   player.dy += gravity;
   player.center.y += player.dy;
-
   //warp screen code
   if(player.center.x > canvas.width){
     player.center.x = 0;
