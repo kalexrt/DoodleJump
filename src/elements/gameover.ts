@@ -9,7 +9,7 @@ export function gameOverScreen(){
     ctx.font = '70px "Gloria Hallelujah", sans-serif';
     ctx.fillText('Game Over', canvas.width / 8, canvas.height / 4);
     ctx.font = '30px "Gloria Hallelujah", sans-serif';
-    ctx.fillText(`Previous Highscore is ${highScr}`,canvas.width / 8 - 30, canvas.height/2 - 50)
+    ctx.fillText(`Previous Highscore is ${highScr}`,canvas.width / 8, canvas.height/2 - 50)
     ctx.fillText(`Your score was ${Math.floor(score)}`, canvas.width / 5, canvas.height/2 + 50);
     ctx.fillText(`Press Space to restart`, canvas.width / 6, canvas.height *  3/4);
   }

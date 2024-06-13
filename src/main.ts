@@ -10,11 +10,15 @@ import { generatePlatform,newPlatform, drawPlatform } from './elements/platform'
 import { gameOverScreen } from './elements/gameover';
 import { drawScore } from './elements/score';
 import { moveDoodler, stopDoodler } from './elements/events';
+import { clickPLay, hoverPlay, mainMenu } from './elements/mainmenu';
 
+
+export let menu = true;
 export let score = 0;
-export let gameOver = false;
+export let gameOver = true;
 export let platformArray:Rectangle[] = [];
 export const player = new Doodler(50,50,new Point(canvas.width/2 - 25, canvas.height*3/4 - 25))
+
 player.image = leftImage;
 player.dy = jumpvelocity;
 
@@ -23,7 +27,12 @@ canvas.height = CANVAS_HEIGHT;
 
 platformImage.src = platformImg;
 
-startGame();
+window.onload = function() {
+  mainMenu();
+};
+
+
+
 
 function draw() {
   if (gameOver) return gameOverScreen();
@@ -36,13 +45,10 @@ function draw() {
   //iterate through each platform
   platformArray.forEach(platform => {
     updatePlatform(platform);
-
     //detect collision only if the player is coming down i.e. dy is positive
     if (detectCollision(player, platform) && player.dy >= 0) player.dy = jumpvelocity;
-
     drawPlatform(platform);
   });
-
   drawScore();
   //next frame
   requestAnimationFrame(draw);
@@ -51,6 +57,7 @@ function draw() {
 export function startGame(){
   //initialize condition
   gameOver = false;
+  menu = false;
   score = 0;
   platformArray = [];
   player.dy = jumpvelocity;
@@ -59,6 +66,7 @@ export function startGame(){
   generatePlatform();
   draw();
 }
+
 
 function updatePlayer(){
   //move player
@@ -92,5 +100,9 @@ function updatePlatform(platform:Rectangle){
   }
 }
 
+// events for main menu
+canvas.addEventListener('click', clickPLay);
+canvas.addEventListener('mousemove', hoverPlay);
+//events for game playing
 document.addEventListener("keydown", moveDoodler);
 document.addEventListener("keyup", stopDoodler);
