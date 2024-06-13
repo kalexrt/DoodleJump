@@ -18,6 +18,8 @@ export let score = 0;
 export let gameOver = true;
 export let platformArray:Rectangle[] = [];
 export const player = new Doodler(50,50,new Point(canvas.width/2 - 25, canvas.height*3/4 - 25))
+const collisionSound = document.getElementById('collisionSound') as HTMLAudioElement;
+const loseSound = document.getElementById('loseSound') as HTMLAudioElement;
 
 player.image = leftImage;
 player.dy = jumpvelocity;
@@ -32,8 +34,6 @@ window.onload = function() {
 };
 
 
-
-
 function draw() {
   if (gameOver) return gameOverScreen();
   //clear background
@@ -46,7 +46,11 @@ function draw() {
   platformArray.forEach(platform => {
     updatePlatform(platform);
     //detect collision only if the player is coming down i.e. dy is positive
-    if (detectCollision(player, platform) && player.dy >= 0) player.dy = jumpvelocity;
+    if (detectCollision(player, platform) && player.dy >= 0){
+      collisionSound.currentTime = 0; // Rewind to the start
+      collisionSound.play();
+      player.dy = jumpvelocity;
+    }; 
     drawPlatform(platform);
   });
   drawScore();
@@ -84,6 +88,8 @@ function updatePlayer(){
   //  lose condition
   if(player.center.y > canvas.height) {
     gameOver = true;
+    loseSound.currentTime = 0; 
+    loseSound.play();
   };
   ctx.drawImage(player.image,player.center.x ,player.center.y,player.width,player.height)
 }
